@@ -6,7 +6,7 @@ module.exports = {
   las dependencias para hacer el bundle.
   Important: Podemos especificar varios entry point, pero realmente usaremos uno en este caso
   */
-  entry: './src/js/index.js',
+  entry: ['babel-polyfill', './src/js/index.js'],
   /*
   Output: Le dice a webpack donde salvar nuestro bundle files.
     - path: El valor del path que se le coloca a esta propiedad debe ser absoluto. Por ende para
@@ -27,5 +27,16 @@ module.exports = {
       template: './src/index.html'
      }
     )
-  ]
-}
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
+      }
+    ]
+  }
+};
