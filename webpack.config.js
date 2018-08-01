@@ -1,4 +1,5 @@
 const path = require('path'); // Used because of the explained reason below about path.
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   /*Entry: Is where webpack will start the bundling. O sea es donde empezara a buscar
@@ -19,5 +20,12 @@ module.exports = {
   devServer: {
     // Directorio donde webpack debe poner los bundle.
     contentBase: './dist'
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      fileName: 'index.html',
+      template: './src/index.html'
+     }
+    )
+  ]
 }
