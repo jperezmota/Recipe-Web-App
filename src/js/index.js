@@ -100,7 +100,6 @@ const controlRecipe = async () => {
 
   }
 
-
 };
 
 window.addEventListener('hashchange', controlRecipe);
@@ -132,7 +131,6 @@ elements.shopping.addEventListener('click', e => {
     // Delete from the UI.
     listView.deleteItem(id);
   }else if(e.target.matches('.shopping__count-value')){ // Handle the count update
-    console.log('entre paca');
     const val = parseFloat(e.target.value, 10);
     state.list.updateCount(id, val);
   }
@@ -142,9 +140,6 @@ elements.shopping.addEventListener('click', e => {
 /*
  LIKE CONTROLLER
 */
-state.likes = new Likes();
-likesView.toggleLikeMenu(state.likes.getNumLikes());
-
 const controlLike = () =>{
 
   if(!state.likes) state.likes = new Likes();
@@ -179,6 +174,12 @@ const controlLike = () =>{
 
 };
 
+window.addEventListener('load', ()=>{
+  state.likes = new Likes();
+  state.likes.readStorage();
+  likesView.toggleLikeMenu(state.likes.getNumLikes());
+  state.likes.likes.forEach(like => likesView.renderLike(like));
+});
 
 // Handling recipe buttons clicks.
 elements.recipe.addEventListener('click', e => {

@@ -8,15 +8,16 @@ export const clearRecipe = ()=>{
 const formatCount = count =>{
   if(count){
     // ex: count = 2.5 -> 2 1/2 | count = 0.5 -> 1/2
-    const [int, dec] = count.toString().split('.').map(el => parseInt(el, 10));
+    const theNewCount = Math.round(count * 100000)/10000;
+    const [int, dec] = theNewCount.toString().split('.').map(el => parseInt(el, 10));
 
-    if(!dec) return count;
+    if(!dec) return theNewCount;
 
     if(int === 0){
-      const fr = new Fraction(count);
+      const fr = new Fraction(theNewCount);
       return `${fr.numerator}/${fr.denominator}`;
     }else{
-      const fr = new Fraction(count - int);
+      const fr = new Fraction(theNewCount - int);
       return `${int} ${fr.numerator}/${fr.denominator}`;
     }
 
